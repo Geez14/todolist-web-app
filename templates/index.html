@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-
 <head>
-    <title>Django To Do List App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TodoApp</title>
     <style>
         body {
             margin: 5px;
@@ -73,24 +69,14 @@
             width: 7px;
         }
 
-        /* Style the close button */
-        .close {
-            position: absolute;
-            right: 0;
-            top: 0;
-            padding: 12px 16px 12px 16px;
-        }
-
-        .close:hover {
-            background-color: #ee7d75;
-            color: white;
-        }
-
         /* Style the header */
         .header {
             border-radius: 10px 10px 0 0;
             background-color: #9e9e9e;
             padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             color: white;
             text-align: center;
         }
@@ -108,7 +94,7 @@
             padding: 30px 40px;
             color: white;
             text-align: center;
-            border-radius:0 0 10px 10px;
+            border-radius: 0 0 10px 10px;
         }
 
         /* Style the input */
@@ -117,10 +103,20 @@
             color: #363636;
             border: none;
             border-radius: 10px;
-            width: 80%;
+            width: 70%;
             padding: 10px;
-            float: left;
             font-size: 16px;
+        }
+
+        select {
+            border-radius: 10px;
+            border: none;
+        }
+
+        #descp {
+            width: 100%;
+            padding: 20px;
+            overflow-y: scroll;
         }
 
         /* Style the "Add" button */
@@ -150,13 +146,41 @@
             #tool {
                 flex-direction: column;
                 align-items: center;
-                gap: 5px;
+                gap: 10px;
             }
 
             .addBtn {
                 width: 50%;
                 padding: 10px;
             }
+        }
+
+        #complete_tool {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .action {
+            position: absolute;
+            right: 0px;
+        }
+
+        #detail:hover {
+            background-color: #55cb6b;
+        }
+
+        #close:hover {
+            background-color: #d16262;
+        }
+
+        a {
+            transition: 0.3s;
+            margin: 0px;
+            padding: 12px 10px 16px 8px;
+            text-decoration: none;
+            color: black
         }
     </style>
 </head>
@@ -167,9 +191,19 @@
         <h2 style="margin:5px">ToDo List Web-App</h2>
         <form action="" method="POST">
             {% csrf_token %}
-            <div id="tool">
-                <input type="text" name="title" id="myInput" placeholder="Title...">
-                <button type="submit" class="addBtn">Add</button>
+            <div style="display: flex; flex-direction:column; gap:10px">
+                <div id="tool">
+
+                    <select name="mood">
+                        {% for emoji in emojies%}
+                        <option>{{emoji}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="text" name="title" id="myInput" placeholder="Title...">
+                    <button type="submit" class="addBtn">Add</button>
+                </div>
+                <input type="text" name="description" id="descp" placeholder="Enter Discription (optional)">
             </div>
         </form>
     </div>
@@ -178,15 +212,19 @@
         <ul id="myUL">
             {% for todo in todos reversed %}
             <li>{{todo.title | title}}
-                <span class="close">
-                    <a style="text-decoration: none; color: black;">Delete</a>
+                <span class="action">
+                    <a href="description/{{todo.id}}" id="detail">
+                        Description
+                    </a>
+                    <a href="delete/{{todo.id}}" id="close">
+                        Delete
+                    </a>
                 </span>
             </li>
             {% endfor %}
         </ul>
     </div>
-
-    <div class=footer></div>
+    <div class=footer>
+        <!-- <p>Devloper : Md Monabbar Anjum 😁</p> -->
+    </div>
 </body>
-
-</html>
