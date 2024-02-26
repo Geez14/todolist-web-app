@@ -3,6 +3,7 @@ from .models import Todo
 from random import choice
 
 listofemojies = [
+    "",
     "😃",
     "😄",
     "😁",
