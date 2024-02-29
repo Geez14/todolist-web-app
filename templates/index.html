@@ -103,7 +103,7 @@
             color: #363636;
             border: none;
             border-radius: 10px;
-            width: 70%;
+            width: 80%;
             padding: 10px;
             font-size: 16px;
         }
@@ -112,7 +112,6 @@
             border-radius: 10px;
             border: none;
         }
-
         #descp {
             width: 100%;
             padding: 20px;
@@ -195,7 +194,8 @@
                 <div id="tool">
 
                     <select name="mood">
-                        {% for emoji in emojies%}
+                        <option>Mood </option>
+                        {% for emoji in emojies %}
                         <option>{{emoji}}</option>
                         {% endfor %}
                     </select>
