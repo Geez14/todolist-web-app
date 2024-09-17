@@ -1,53 +1,57 @@
 <html lang="en">
-
-<head>
+  <head>
     <title>TodoApp</title>
     {%load static%}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
 
-<body>
+  <body>
     <div id="myDIV" class="header">
-        <h2 style="margin:5px">ToDo List Web-App</h2>
-        <form action="" method="POST" id="task-form">
-            {% csrf_token %}
-            <div style="display: flex; flex-direction:column; gap:10px">
-                <div id="tool">
+      <h2 style="margin: 5px">ToDo List Web-App</h2>
+      <form action="" method="POST" id="task-form">
+        {% csrf_token %}
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div id="tool">
+            <select title="no-title" name="mood" id="mood">
+              <option>Mood</option>
+              {% for emoji in emojies %}
+              <option>{{emoji}}</option>
+              {% endfor %}
+            </select>
 
-                    <select title="no-title" name="mood" id="mood">
-                        <option>Mood </option>
-                        {% for emoji in emojies %}
-                        <option>{{emoji}}</option>
-                        {% endfor %}
-                    </select>
-
-                    <input type="text" name="title" id="myInput" placeholder="Title...">
-                    <button type="submit" class="addBtn">Add</button>
-                </div>
-                <input type="text" name="description" id="descp" placeholder="Description...(optional)">
-            </div>
-        </form>
+            <input
+              type="text"
+              name="title"
+              id="myInput"
+              placeholder="Title..."
+            />
+            <button type="submit" class="addBtn">Add</button>
+          </div>
+          <input
+            type="text"
+            name="description"
+            id="descp"
+            placeholder="Description...(optional)"
+          />
+        </div>
+      </form>
     </div>
 
     <div class="table">
-        <ul id="myUL">
-            {% for todo in todos reversed %}
-            <li>{{todo.title | title}}
-                <span class="action">
-                    <a href="description/{{todo.id}}" id="detail">
-                        Description
-                    </a>
-                    <a href="delete/{{todo.id}}" id="close">
-                        Delete
-                    </a>
-                </span>
-            </li>
-            {% endfor %}
-        </ul>
+      <ul id="myUL">
+        {% for todo in todos reversed %}
+        <li>
+          {{todo.title | title}}
+          <span class="action">
+            <a href="description/{{todo.id}}" id="detail"> Description </a>
+            <a href="delete/{{todo.id}}" id="close"> Delete </a>
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
-    <div class=footer>
-        <!-- <p>Devloper : Md Monabbar Anjum 😁</p> -->
+    <div class="footer">
+      <!-- <p>Devloper : Md Monabbar Anjum 😁</p> -->
     </div>
-</body>
-
+  </body>
 </html>
